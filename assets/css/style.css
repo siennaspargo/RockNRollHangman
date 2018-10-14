@@ -1,0 +1,38 @@
+body {
+  background: black;
+  font-family: 'Anton', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+header {
+  font-family: 'Anton', sans-serif;
+  font-size: 100px;
+  color: yellow;
+}
+
+p {
+  font-family: 'Anton', sans-serif;
+  color: yellow;
+  font-size: 30px;
+  text-align: center;
+}
+
+.inline-img {
+  max-height: auto;
+  max-width: 30%;
+  border-radius: 50px;
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+
