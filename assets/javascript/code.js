@@ -11,8 +11,7 @@ var songBank = [
   "black magic woman",
   "im just a girl",
   "i feel like a woman",
-  "",
-]
+];
 
 // variables to hold wins, losses, guesses left, letters guessed
 var wins = 0;
@@ -35,19 +34,23 @@ var lettersGuessed = document.getElementById("guessed-letters");
 
 // function for when a key is pressed/letter guessed
 document.onkeyup = function (event) {
-  var userGuess = event.key;
+  lettersGuessed.textContent = event.key;
+  
+  // userGuess = event.key;
 
-  // random choice, loop through array of songBank
+  // set the users guess to lowercase
+  var userGuessLower = userGuess.toLowerCase();
+
+  // randomly choose a word from song bank
   currentWord = songBank[Math.floor(Math.random() * songBank.length)];
 
-  // increments of losses and wins
-
-  if (songBank.indexOf(lettersGuessed) === -1) {
+  // loop through array of songBank
+  if (songBank.indexOf(userGuessLower) === -1) {
     losses++;
-    console.log("nice job")
+    console.log("nope, not in the song bank");
   } else {
     wins++;
-    console.log("bad job")
+    console.log("your guess is in the songbank");
   }
 
 
@@ -55,10 +58,9 @@ document.onkeyup = function (event) {
 
 
   // display letters guessed, wins, losses, word being guessed
-
-currentWord.textContent = userGuess;
-wins.textContent = wins;
-losses.textContent = losses;
-guessesRemaining.textContent = guessesRemaining;
-lettersGuessed.textContent = lettersGuessed;
+  currentWord.textContent = userGuess;
+  wins.textContent = wins;
+  losses.textContent = losses;
+  guessesRemaining.textContent = guessesRemaining;
+  lettersGuessed.textContent = lettersGuessed;
 }
