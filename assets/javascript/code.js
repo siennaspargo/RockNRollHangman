@@ -14,52 +14,51 @@ var songBank = [
   "",
 ]
 
-var currentWord = "";
+// variables to hold wins, losses, guesses left, letters guessed
 var wins = 0;
 var losses = 0;
-var guessesLeft = 0;
+var guessesLeft = 9;
 var lettersGuessed = [];
+
+var currentWord = "";
 var lettersToBeGuessed = [];
 
 // variables to hold info in HTML for display
 
-var currentWord = document.getElementById("currentWord-Text");
-var winsText = document.getElementById("wins-text");
-var lossesText = document.getElementById("losses-text");
-var guessesRemaining = document.getElementById("guessesRemaining");
-var lettersGuessed = document.getElementById("lettersGuessed-text");
-var lettersOfWord = [];
-
-// // function for selection of key/letter
-// startGame() {
-  
-//   // set guessesLeft back to beginning
-//   guessesLeft = 9;
+var currentWord = document.getElementById("current-word");
+var wins = document.getElementById("wins");
+var losses = document.getElementById("losses");
+var guessesRemaining = document.getElementById("guesses-remaining");
+var lettersGuessed = document.getElementById("guessed-letters");
 
 
-// }
-document.onkeyup = function(event) {
-   lettersGuessed = event.key;
 
-  // loop through array of songBank
-   currentWord = songBank[Math.floor(Math.random() +1 * songBank.length)];
+// function for when a key is pressed/letter guessed
+document.onkeyup = function (event) {
+  var userGuess = event.key;
 
-   // increments of losses and wins
+  // random choice, loop through array of songBank
+  currentWord = songBank[Math.floor(Math.random() * songBank.length)];
 
-   if (songBank.indexOf(lettersGuessed) === -1) {
-     losses++;
-     console.log("nice job")
-   } else {
-     wins ++;
-     console.log("bad job")
-   }
-}
+  // increments of losses and wins
 
-// display letters guessed, wins, losses, word being guessed
+  if (songBank.indexOf(lettersGuessed) === -1) {
+    losses++;
+    console.log("nice job")
+  } else {
+    wins++;
+    console.log("bad job")
+  }
 
-currentWord.textContent = currentWord;
-winsText.textContent = wins;
-lossesText.textContent = losses;
+
+
+
+
+  // display letters guessed, wins, losses, word being guessed
+
+currentWord.textContent = userGuess;
+wins.textContent = wins;
+losses.textContent = losses;
 guessesRemaining.textContent = guessesRemaining;
 lettersGuessed.textContent = lettersGuessed;
-
+}
