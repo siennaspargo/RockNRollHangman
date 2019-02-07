@@ -45,10 +45,11 @@ for (var i = 0; i < currentWord.length; i++) {
   answerArray.push('_');
 }
 
-
 document.getElementById('current-word').innerHTML = answerArray.join(' ');
-document.getElementById('guesses-remaining').innerHTML = guessesLeft;
 document.getElementById('wins').innerHTML = wins;
+document.getElementById('losses').innerHTML = losses;
+document.getElementById('guesses-remaining').innerHTML = guessesLeft;
+
 
 };
 
@@ -64,6 +65,7 @@ if (currentWord.indexOf(guess) === -1 && wrongAnswers.indexOf(guess) === -1) {
 
   document.getElementById("guesses-remaining").innerHTML = guessesRemaining;
 
+  
 
 } else {
 
@@ -89,8 +91,13 @@ function wins() {
 
   // check to see if there are _'s in current word array, then it has an index and its from 0 + //
 
-  if (guessesRemaining < 1 && answerArray.indexOf('_') !== -1) {
+  if (guessesLeft <= 1 && answerArray.indexOf('_') !== -1) {
+
+    losses ++;
+
     alert("too bad, you lost the game. better luck next time.")
+
+    document.getElementById('losses') = losses;
 
     setTimeout(startGame, 4000);
 
@@ -101,6 +108,8 @@ function wins() {
 
     alert("Rock On!! You WON !!");
 
+    document.getElementById('wins') = wins;
+
     setTimeout(startGame, 4000);
   }
 };
@@ -108,26 +117,26 @@ function wins() {
 
 // function for when a key is pressed/letter guessed
 document.onkeyup = function (event) {
-  lettersGuessed.textContent = event.key;
+  // lettersGuessed.textContent = event.key;
 
-  var userGuess = event.key;
+  // set key clicked to lowercase
+  var userGuess = event.key.toLowerCase();
   console.log(userGuess);
 
-  // set the users guess to lowercase
-  var userGuessLower = userGuess.toLowerCase();
-
   // loop through array of songBank
-  if (songBank.indexOf(userGuessLower) === -1) {
+  if (songBank.indexOf(userGuess) === -1 && answerArray.indexOf(userGuess) === -1) {
     losses++;
-    console.log("nope, not in the song bank");
   } else {
     wins++;
-    console.log("your guess is in the songbank");
   }
 
   // display letters guessed, wins, losses, word being guessed
 
   updateGuess(userGuess);
+  // document.getElementById('wins') = wins;
+  // document.getElementById('losses') = losses;
+  // document.getElementById('guesses-remaining') = guessesLeft;
+  // document.getElementById('guessed-letters') = guessedLetters;
 };
 
 startGame();
