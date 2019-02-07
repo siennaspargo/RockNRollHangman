@@ -1,9 +1,6 @@
 # Word-Guess-Game-JS
 Welcome to my spin off of Hangman; Hard Rock style.
 
-Exclusively JavaScript
+Exclusively Vanilla JavaScript
 
-Psuedocode
-
-- 
-
+Deployed with GitHub Pages: https://siennaspargo.github.io/RockNRollHangman/
