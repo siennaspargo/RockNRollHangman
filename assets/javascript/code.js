@@ -13,88 +13,81 @@ var songBank = [
   "i feel like a woman",
 ];
 
-// variables to hold wins, losses, guesses left, letters guessed
+// game variables
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
 var answerArray = [];
 var wrongAnswers = [];
-
+// string to hold current word being guessed
 var currentWord = "";
 
 
 // variables to hold info in HTML for display
-
 var currentWord = document.getElementById("current-word");
-var wins = document.getElementById("wins");
-var losses = document.getElementById("losses");
+var wins = document.getElementById("wins").innerHTML;
+var losses = document.getElementById("losses").innerHTML;
 var guessesRemaining = document.getElementById("guesses-remaining");
 var lettersGuessed = document.getElementById("guessed-letters");
 
 
 
 function startGame() {
-  // randomly choose a word from song bank
-currentWord = songBank[Math.floor(Math.random() * songBank.length)];
+  // randomly choose a word from array songBank
+  currentWord = songBank[Math.floor(Math.random() * songBank.length)];
 
-document.getElementById("current-word").innerHTML = wrongAnswers;
+  // place wrongly guessed letters at currentword
+  document.getElementById("current-word").innerHTML = wrongAnswers;
 
-guessesLeft = currentWord.length + 3;
+  // set guessesLeft to 3 chances more than number of letters in currentWord
+  guessesLeft = currentWord.length + 3;
 
-for (var i = 0; i < currentWord.length; i++) {
-  answerArray.push('_');
+  // display _'s on page equal to length of currentWord
+  for (var i = 0; i < currentWord.length; i++) {
+    answerArray.push('_');
+  }
+
+  // display answerArray and guessesLeft on page
+  document.getElementById('current-word').innerHTML = answerArray.join(" ");
+  document.getElementById('wins').innerHTML = wins;
+  document.getElementById('guesses-remaining').innerHTML = guessesLeft;
+
+
 }
-
-document.getElementById('current-word').innerHTML = answerArray.join(' ');
-document.getElementById('wins').innerHTML = wins;
-document.getElementById('losses').innerHTML = losses;
-document.getElementById('guesses-remaining').innerHTML = guessesLeft;
-
-
-};
 
 
 function updateGuess(guess) {
-// for loop for checking if guess is incorrect
+  // for loop for checking if guess is incorrect
+  if (currentWord.indexOf(guess) === -1 && wrongAnswers.indexOf(guess) === -1) {
+    wrongAnswers.push(guess);
+    document.getElementById("guessed-letters").innerHTML = wrongAnswers.join(" ");
+    guessesLeft--;
+    document.getElementById("guesses-remaining").innerHTML = guessesLeft;
 
-if (currentWord.indexOf(guess) === -1 && wrongAnswers.indexOf(guess) === -1) {
+    losses++;
 
-  wrongAnswers.push(guess);
+  } else {
+    // check if guess is correct
+    for (var i = 0; i < currentWord.length; i++) {
+      if (currentWord[i] === guess) {
+        answerArray[i] = guess;
+        guessesLeft--;
+        document.getElementById('guesses-remaining').innerHTML = guessesLeft;
+        document.getElementById('current-word').innerHTML = answerArray.join(" ");
 
-  document.getElementById("guessed-letters").innerHTML = wrongAnswers.join(' ');
-
-  document.getElementById("guesses-remaining").innerHTML = guessesRemaining;
-
-  
-
-} else {
-
-  // check if guess is correct
-  for (var i = 0; i < currentWord.length; i++) {
-    if (currentWord[i] === guess) {
-      answerArray[i] = guess;
-      guessesLeft--;
-
-      document.getElementById('guesses-remaining').innerHTML = guessesLeft;
-
-      document.getElementById('current-word').innerHTML = answerArray.join(" ");
-
+       wins++;
+      }
     }
   }
-}
-guessesRemaining--; 
-console.log(guessesRemaining);
 
-};
+}
 
 function wins() {
 
   // check to see if there are _'s in current word array, then it has an index and its from 0 + //
 
-  if (guessesLeft <= 1 && answerArray.indexOf('_') !== -1) {
-
-    losses ++;
-
+  if (guessesLeft <= 0) {
+    
     alert("too bad, you lost the game. better luck next time.")
 
     document.getElementById('losses') = losses;
@@ -102,7 +95,7 @@ function wins() {
     setTimeout(startGame, 4000);
 
     // check if value is the same and increase wins //
-  } else if (answerArray.indexOf('_') == -1)  {
+  } else if (answerArray.indexOf('_') == -1) {
 
     wins++;
 
@@ -112,31 +105,22 @@ function wins() {
 
     setTimeout(startGame, 4000);
   }
-};
+}
 
 
 // function for when a key is pressed/letter guessed
 document.onkeyup = function (event) {
-  // lettersGuessed.textContent = event.key;
 
   // set key clicked to lowercase
   var userGuess = event.key.toLowerCase();
   console.log(userGuess);
 
   // loop through array of songBank
-  if (songBank.indexOf(userGuess) === -1 && answerArray.indexOf(userGuess) === -1) {
-    losses++;
-  } else {
-    wins++;
+  if (answerArray.indexOf(userGuess) == -1) {
+    updateGuess(userGuess);
+  } if (event.keyCode == 13) {
+    startGame();
   }
-
-  // display letters guessed, wins, losses, word being guessed
-
-  updateGuess(userGuess);
-  // document.getElementById('wins') = wins;
-  // document.getElementById('losses') = losses;
-  // document.getElementById('guesses-remaining') = guessesLeft;
-  // document.getElementById('guessed-letters') = guessedLetters;
 };
 
 startGame();
