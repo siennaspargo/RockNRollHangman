@@ -21,7 +21,7 @@ var songBank = [
 // game variables
 var wins = 0;
 var losses = 0;
-var guessesLeft = 9;
+var guessesLeft;
 var answerArray = [];
 var wrongAnswers = [];
 // string to hold current word being guessed
@@ -54,7 +54,8 @@ function startGame() {
 
   // display answerArray and guessesLeft on page
   document.getElementById('current-word').innerHTML = answerArray.join(" ");
-  document.getElementById('wins').innerHTML = wins;
+  document.getElementById('wins').innerHTML = wins++;
+  document.getElementById('wins').innerHTML = losses++;
   document.getElementById('guesses-remaining').innerHTML = guessesLeft;
 
 
@@ -68,9 +69,8 @@ function updateGuess(guess) {
     document.getElementById("guessed-letters").innerHTML = wrongAnswers.join(" ");
     guessesLeft--;
     document.getElementById("guesses-remaining").innerHTML = guessesLeft;
-
-    losses++;
-
+    
+    checkWins();
   } else {
     // check if guess is correct
     for (var i = 0; i < currentWord.length; i++) {
@@ -80,28 +80,24 @@ function updateGuess(guess) {
         document.getElementById('guesses-remaining').innerHTML = guessesLeft;
         document.getElementById('current-word').innerHTML = answerArray.join(" ");
 
-       wins++;
+        checkWins();
       }
+
     }
   }
-
 }
 
-function wins() {
+function checkWins() {
 
   // check to see if there are _'s in current word array, then it has an index and its from 0 + //
 
-  if (guessesLeft <= 0) {
-    
+  if (guessesLeft < 1 && answerArray.indexOf('_') !== -1) {
     alert("too bad, you lost the game. better luck next time.")
-
     document.getElementById('losses') = losses;
-
     setTimeout(startGame, 4000);
 
     // check if value is the same and increase wins //
   } else if (answerArray.indexOf('_') == -1) {
-
     wins++;
 
     alert("Rock On!! You WON !!");
@@ -110,7 +106,7 @@ function wins() {
 
     setTimeout(startGame, 4000);
   }
-}
+};
 
 
 // function for when a key is pressed/letter guessed
