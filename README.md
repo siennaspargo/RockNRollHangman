@@ -3,4 +3,4 @@ Welcome to my spin off of Hangman; Hard Rock style.
 
 Exclusively Vanilla JavaScript
 
-Deployed with GitHub Pages: https://siennaspargo.github.io/RockNRollHangman/
+Deployed with GitHub Pages: https://siennaspargo.github.io/WordGuess/
