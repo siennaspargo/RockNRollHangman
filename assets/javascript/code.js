@@ -1,7 +1,3 @@
-// * cant get the wins and the losses to incrememnt
-// ** guesses remaning goes into negative for some reason
-
-
 
 // Variables
 var songBank = [
