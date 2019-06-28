@@ -7,5 +7,8 @@ Deployed with GitHub Pages: https://siennaspargo.github.io/WordGuess/
 
 
 <p align="center">
-  <img src="https://ibb.co/t2HH7wy" width="350" title="homepage">
+  <img src="https://i.ibb.co/qgDDtLb/Screen-Shot-2019-06-28-at-7-25-52-PM.jpg" width="350" title="homepage">
 </p>
+
+
+
