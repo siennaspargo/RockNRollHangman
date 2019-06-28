@@ -1,5 +1,5 @@
 # Word-Guess-Game-JS
-Welcome to my spin off of Hangman; Hard Rock style.
+Welcome to my spin off of Hangman; Classic Rock style.
 
 Exclusively Vanilla JavaScript
 
